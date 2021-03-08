@@ -4,5 +4,24 @@
     <string name="tab_album">Album</string>
     <string name="tab_date">Ngày</string>
     <string name="tab_face">Người</string>
-    <string name="tab_settings">Cài đặt</string>
+    <string name="tab_settings">Thêm</string>
+    <string name="action_new_photo">Chụp ảnh</string>
+    <string name="action_new_video">Quay video</string>
+    <string name="placeholder_tab_all">Tất cả ảnh của bạn sẽ hiện ở đây.</string>
+    <string name="placeholder_tab_album">Tất cả album của bạn sẽ hiện ở đây.</string>
+    <string name="placeholder_tab_date">Ảnh gộp theo ngày sẽ hiện ở đây.</string>
+    <string name="placeholder_tab_face">Tất cả mặt nhận dạng được sẽ hiện ở đây.</string>
+    <string name="info_location">Vị trí</string>
+    <string name="info_timestamp">Thời gian</string>
+    <string name="info_resolution">Độ phân giải</string>
+    <string name="info_file_size">Kích thước</string>
+    <string name="info_file_path">Đường dẫn</string>
+    <string name="action_delete">Xóa</string>
+    <string name="action_favorite">Thêm vào yêu thích</string>
+    <string name="action_edit">Chỉnh sửa</string>
+    <string name="action_share">Chia sẻ</string>
+    <string name="action_copy">Sao chép đến…</string>
+    <string name="action_move">Chuyển đến…</string>
+    <string name="action_location">Sửa thẻ vị trí</string>
+    <string name="action_wallpaper">Đặt làm hình nền</string>
 </resources>

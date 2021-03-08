@@ -12,6 +12,9 @@
     <!-- Master background/foreground -->
     <color name="background">@color/md_grey_900</color>
     <color name="foreground">@color/md_grey_50</color>
+    <!-- Secondary background/foreground (cards, etc.) -->
+    <color name="background2">@color/md_grey_900</color>
+    <color name="foreground2">@color/md_grey_100</color>
     <!-- API 22-: force dark status bar -->
     <color name="status_bar_dark">@color/md_grey_900</color>
 
