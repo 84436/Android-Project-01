@@ -10,9 +10,9 @@
     <color name="white">@android:color/white</color>
 
     <!-- Master background/foreground -->
-    <color name="background">@color/md_grey_50</color>
-    <color name="foreground">@color/md_grey_900</color>
+    <color name="background">@color/md_grey_900</color>
+    <color name="foreground">@color/md_grey_50</color>
 
     <!-- Launcher icon -->
-    <color name="ic_background_grid">#10000000</color>
+    <color name="ic_background_grid">#10FFFFFF</color>
 </resources>
