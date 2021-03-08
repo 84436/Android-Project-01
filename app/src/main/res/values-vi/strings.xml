@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tab_all">Tất cả</string>
+    <string name="tab_album">Album</string>
+    <string name="tab_date">Ngày</string>
+    <string name="tab_face">Người</string>
+    <string name="tab_settings">Cài đặt</string>
+</resources>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/tab_all"
+        android:title="@string/tab_all"
+        android:icon="@drawable/ic_tab_all"
+        android:enabled="true"
+        />
+    <item
+        android:id="@+id/tab_album"
+        android:title="@string/tab_album"
+        android:icon="@drawable/ic_tab_album"
+        android:enabled="true"
+        />
+    <item
+        android:id="@+id/tab_date"
+        android:title="@string/tab_date"
+        android:icon="@drawable/ic_tab_date"
+        android:enabled="true"
+        />
+    <item
+        android:id="@+id/tab_face"
+        android:title="@string/tab_face"
+        android:icon="@drawable/ic_tab_face"
+        android:enabled="true"
+        />
+    <item
+        android:id="@+id/tab_settings"
+        android:title="@string/tab_settings"
+        android:icon="@drawable/ic_tab_settings"
+        android:enabled="true"
+        />
+</menu>

@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">Gallery One</string>
+    <!-- App branding -->
+    <string name="app_name" translatable="false">Gallery One</string>
+
+    <!-- Bottom nav -->
+    <string name="tab_all">All</string>
+    <string name="tab_album">Albums</string>
+    <string name="tab_date">Date</string>
+    <string name="tab_face">People</string>
+    <string name="tab_settings">Settings</string>
 </resources>
