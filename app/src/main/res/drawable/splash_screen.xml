@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" android:opacity="opaque">
     <item android:drawable="@color/background"/>
-    <item android:drawable="@drawable/ic_launcher_foreground" android:gravity="center"/>
+    <item android:drawable="@drawable/splash_logo"
+          android:left="24dp"
+          android:right="24dp"
+          android:gravity="center"/>
+    <!-- TODO fix logo incorrect AR/padding -->
+    <!-- https://stackoverflow.com/a/63293858 -->
 </layer-list>
