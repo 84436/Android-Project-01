@@ -7,6 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".ViewImageActivity" >
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_close_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_back"
+        android:layout_margin="12dp"
+        app:fabCustomSize="32dp"
+        app:elevation="4dp"
+        app:backgroundTint="@color/background2"
+        android:onClick="closeViewer" />
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

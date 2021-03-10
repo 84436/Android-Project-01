@@ -2,8 +2,8 @@ package hcmus.android.gallery1
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.FrameLayout
-import android.widget.LinearLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class ViewImageActivity : AppCompatActivity() {
@@ -22,6 +22,13 @@ class ViewImageActivity : AppCompatActivity() {
         BottomSheetBehavior.from(bottomSheet).apply {
             isFitToContents = false
             halfExpandedRatio = 0.6f
+        }
+    }
+
+    fun closeViewer(view: View) {
+        when (view.id) {
+            R.id.btn_close_imageview -> finish()
+            else -> {}
         }
     }
 }
