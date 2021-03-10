@@ -9,12 +9,22 @@
     tools:context=".MainMoreFragment">
 
     <ListView
+        android:id="@+id/tab_more_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
     </ListView>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/tab_more_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="64dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tab_more_list" />
 
     <include
         layout="@layout/partial_camera_bar"

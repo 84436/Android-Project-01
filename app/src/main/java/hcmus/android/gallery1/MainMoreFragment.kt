@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.add
+import androidx.fragment.app.commit
 
 // private const val ARG_PARAM1 = "param1"
 
@@ -19,6 +21,14 @@ class MainMoreFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             // param1 = it.getString(ARG_PARAM1)
+        }
+
+        // Insert settings fragment
+        if (savedInstanceState == null) {
+            childFragmentManager.commit {
+                setReorderingAllowed(true)
+                add<SettingsFragment>(R.id.tab_more_fragment_container)
+            }
         }
     }
 

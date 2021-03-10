@@ -8,6 +8,7 @@
     <string name="placeholder_tab_album">All your albums will appear here.</string>
     <string name="placeholder_tab_date">Photos grouped by date will appear here.</string>
     <string name="placeholder_tab_face">All recognized faces will appear here.</string>
+    <string name="placeholder_secure">Your secrets will appear here.</string>
 
     <!-- Bottom nav -->
     <string name="tab_all">All</string>
@@ -19,11 +20,8 @@
     <!-- Camera action bar -->
     <string name="action_new_photo">Take photo</string>
     <string name="action_new_video">Record video</string>
-    <string name="info_location">Location</string>
-    <string name="info_timestamp">Timestamp</string>
-    <string name="info_resolution">Resolution</string>
-    <string name="info_file_size">File size</string>
-    <string name="info_file_path">File path</string>
+
+    <!-- Image bottom sheet: Actions -->
     <string name="action_delete">Delete</string>
     <string name="action_favorite">Add to favorite</string>
     <string name="action_edit">Edit</string>
@@ -32,4 +30,33 @@
     <string name="action_move">Move to…</string>
     <string name="action_location">Edit location tag</string>
     <string name="action_wallpaper">Set as wallpaper</string>
+
+    <!-- Image bottom sheet: Details -->
+    <string name="info_location">Location</string>
+    <string name="info_timestamp">Timestamp</string>
+    <string name="info_resolution">Resolution</string>
+    <string name="info_file_size">File size</string>
+    <string name="info_file_path">File path</string>
+
+    <!-- Settings: headers -->
+    <string name="settings_header_theme">Theme</string>
+    <string name="settings_header_view">View mode (per tab)</string>
+    <string name="settings_header_secret">Secret album</string>
+
+    <!-- Settings: items -->
+    <string name="settings_theme_base">Base theme</string>
+    <string name="settings_secret_passcode_change">Change passcode</string>
+
+    <!-- Settings: values for Base theme -->
+    <string name="settings_theme_base_value_follow_system">Follow system</string>
+    <string name="settings_theme_base_value_light">Light</string>
+    <string name="settings_theme_base_value_dark">Dark</string>
+
+    <!-- Settings: values for View mode -->
+    <string name="settings_view_secret_album">Secret album</string>
+    <string name="settings_view_value_grid_2">Grid (2 columns)</string>
+    <string name="settings_view_value_grid_3">Grid (3 columns)</string>
+    <string name="settings_view_value_grid_4">Grid (4 columns)</string>
+    <string name="settings_view_value_grid_5">Grid (5 columns)</string>
+    <string name="settings_view_value_list">List</string>
 </resources>

@@ -1,0 +1,79 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/settings_header_theme">
+
+        <ListPreference
+            app:defaultValue="follow_system"
+            app:entries="@array/theme_base_entries"
+            app:entryValues="@array/theme_base_values"
+            app:icon="@drawable/ic_theme_base"
+            app:key="theme_base"
+            app:title="@string/settings_theme_base"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/settings_header_view">
+
+        <ListPreference
+            app:defaultValue="grid_3"
+            app:entries="@array/view_mode_entries"
+            app:entryValues="@array/view_mode_values"
+            app:key="view_mode_all"
+            app:title="@string/tab_all"
+            app:icon="@drawable/ic_tab_all"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            app:defaultValue="grid_2"
+            app:entries="@array/view_mode_simple_entries"
+            app:entryValues="@array/view_mode_simple_values"
+            app:key="view_mode_album"
+            app:title="@string/tab_album"
+            app:icon="@drawable/ic_tab_album"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            app:defaultValue="list"
+            app:entries="@array/view_mode_simple_entries"
+            app:entryValues="@array/view_mode_simple_values"
+            app:key="view_mode_date"
+            app:title="@string/tab_date"
+            app:icon="@drawable/ic_tab_date"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            app:defaultValue="grid_2"
+            app:entries="@array/view_mode_simple_entries"
+            app:entryValues="@array/view_mode_simple_values"
+            app:key="view_mode_face"
+            app:title="@string/tab_face"
+            app:icon="@drawable/ic_tab_face"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            app:defaultValue="grid_3"
+            app:entries="@array/view_mode_entries"
+            app:entryValues="@array/view_mode_values"
+            app:key="view_mode_secret"
+            app:title="@string/settings_view_secret_album"
+            app:icon="@drawable/ic_secret_album"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/settings_header_secret">
+
+        <EditTextPreference
+            android:defaultValue=""
+            android:key="secret_passcode"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/settings_secret_passcode_change"
+            app:icon="@drawable/ic_secret_passcode"
+            app:useSimpleSummaryProvider="false" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

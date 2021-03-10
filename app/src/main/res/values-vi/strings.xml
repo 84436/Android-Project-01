@@ -24,4 +24,19 @@
     <string name="action_move">Chuyển đến…</string>
     <string name="action_location">Sửa thẻ vị trí</string>
     <string name="action_wallpaper">Đặt làm hình nền</string>
+    <string name="placeholder_secure">Những bí mật thầm kín của bạn sẽ nằm ở đây.</string>
+    <string name="settings_view_value_grid_3">Lưới (3 cột)</string>
+    <string name="settings_view_value_grid_4">Lưới (4 cột)</string>
+    <string name="settings_view_value_grid_5">Lưới (5 cột)</string>
+    <string name="settings_view_value_grid_2">Lưới (2 cột)</string>
+    <string name="settings_view_value_list">Danh sách</string>
+    <string name="settings_header_secret">Album bí mật</string>
+    <string name="settings_view_secret_album">Album bí mật</string>
+    <string name="settings_secret_passcode_change">Đổi mật khẩu</string>
+    <string name="settings_header_theme">Chủ đề</string>
+    <string name="settings_theme_base">Tông nền</string>
+    <string name="settings_theme_base_value_follow_system">Theo cài đặt hệ thống</string>
+    <string name="settings_theme_base_value_light">Sáng</string>
+    <string name="settings_theme_base_value_dark">Tối</string>
+    <string name="settings_header_view">Kiểu hiển thị (cho từng tab)</string>
 </resources>
