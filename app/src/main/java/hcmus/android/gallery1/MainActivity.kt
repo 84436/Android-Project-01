@@ -14,9 +14,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Reset: splash screen "theme" -> default theme
-        setTheme(R.style.Theme_GalleryOne)
-
         // Hide action bar (title bar)
         supportActionBar?.hide()
 
@@ -30,7 +27,6 @@ class MainActivity : AppCompatActivity() {
                 add<MainAllPhotosFragment>(R.id.main_fragment_container)
             }
         }
-        Log.e("Gallery1", "All tab")
 
         // Event handler for bottom nav
         findViewById<BottomNavigationView>(R.id.main_navbar).setOnNavigationItemSelectedListener { item ->
