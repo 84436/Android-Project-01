@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- TODO remove these colors -->
-    <color name="purple_200">@color/md_purple_200</color>
-    <color name="purple_500">@color/md_purple_500</color>
-    <color name="purple_700">@color/md_purple_700</color>
-    <color name="teal_200">@color/md_teal_200</color>
-    <color name="teal_700">@color/md_teal_700</color>
-    <color name="black">@android:color/black</color>
-    <color name="white">@android:color/white</color>
-
-    <!-- Master background/foreground -->
+    <!-- Primary background/foreground -->
     <color name="background">@color/md_grey_900</color>
     <color name="foreground">@color/md_grey_50</color>
     <!-- Secondary background/foreground (cards, etc.) -->
@@ -20,4 +11,7 @@
 
     <!-- Launcher icon -->
     <color name="ic_background_grid">#10FFFFFF</color>
+
+    <!-- Bottom sheet divider -->
+    <color name="bottom_sheet_divider">#303030</color>
 </resources>

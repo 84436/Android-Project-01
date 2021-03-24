@@ -8,13 +8,13 @@
     <!-- Base application theme. -->
     <style name="Theme.GalleryOne" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/md_purple_200</item>
+        <item name="colorPrimaryVariant">@color/md_purple_700</item>
+        <item name="colorOnPrimary">@color/md_black_1000</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/md_purple_A200</item>
         <item name="colorSecondaryVariant">@color/md_purple_A200</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">@color/md_black_1000</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/status_bar_dark</item>
     </style>

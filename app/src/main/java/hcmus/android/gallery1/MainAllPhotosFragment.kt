@@ -32,7 +32,7 @@ class MainAllPhotosFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() =  MainMoreFragment().apply {
+        fun newInstance() =  MainAllPhotosFragment().apply {
             arguments = Bundle().apply {
                 // putString(ARG_PARAM1, param1)
             }

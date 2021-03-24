@@ -8,7 +8,7 @@ import android.view.ViewGroup
 
 // private const val ARG_PARAM1 = "param1"
 
-class MainAlbumFragment : Fragment() {
+class SecretFragment : Fragment() {
     // private var param1: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,10 +19,10 @@ class MainAlbumFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_main_album, container, false)
+        return inflater.inflate(R.layout.fragment_secure, container, false)
     }
 
     companion object {

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bdrawer_main"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    android:background="@color/background2"
+    android:elevation="8dp"
+    app:behavior_peekHeight="@dimen/bdrawer_peek_height"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- DRAGGABLE SHEET HINT -->
+    <View
+        android:layout_width="32dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_gravity="center"
+        android:background="?android:attr/listDivider" />
+
+    <!-- NAVBAR + EXPAND SHEET BUTTON -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bdrawer_toolbar_height"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/main_navbar"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:backgroundTint="@color/background2"
+            app:elevation="0dp"
+            app:menu="@menu/bottom_drawer_navbar" />
+
+        <ImageButton
+            android:background="@drawable/ripple_rect"
+            android:id="@+id/btn_bottom_sheet_expand"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_bdrawer_up"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/divider"
+        android:paddingBottom="@dimen/divider"
+        android:paddingLeft="@dimen/divider_large"
+        android:paddingRight="@dimen/divider_large"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/bdrawer_header_viewmode"
+            android:paddingBottom="4dp"
+            android:textAlignment="center"
+            android:textStyle="bold" />
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/viewmode_all"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:selectionRequired="true"
+            app:singleSelection="true">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_viewmode_all_list"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/bdrawer_viewmode_list" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_viewmode_all_grid_3"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/bdrawer_viewmode_grid_3"
+                app:icon="@drawable/ic_view_grid" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_viewmode_all_grid_4"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/bdrawer_viewmode_grid_4"
+                app:icon="@drawable/ic_view_grid" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_viewmode_all_grid_5"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/bdrawer_viewmode_grid_5"
+                app:icon="@drawable/ic_view_grid" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <View android:layout_width="match_parent" android:layout_height="@dimen/divider_large" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:paddingBottom="4dp"
+            android:text="@string/bdrawer_header_create"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:showDividers="middle"
+            android:divider="@drawable/empty_8dp" >
+
+            <Button
+                android:id="@+id/btn_new_album"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:icon="@drawable/ic_action_new_album"
+                app:iconGravity="top"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="handleButton"
+                android:text="@string/bdrawer_action_new_album" />
+
+            <Button
+                android:id="@+id/btn_new_video"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:icon="@drawable/ic_action_new_video"
+                app:iconGravity="top"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="handleButton"
+                android:text="@string/bdrawer_action_new_video" />
+
+            <Button
+                android:id="@+id/btn_new_photo"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:icon="@drawable/ic_action_new_photo"
+                app:iconGravity="top"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="handleButton"
+                android:text="@string/bdrawer_action_new_photo" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:showDividers="middle"
+            android:divider="@drawable/empty_8dp">
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="@color/bottom_sheet_divider"
+            android:layout_marginTop="@dimen/divider_large"
+            android:layout_marginBottom="@dimen/divider_large" />
+
+        <TextView
+            android:id="@+id/bottom_sheet_settings_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/placeholder_card_details"
+            android:textAlignment="center"
+            android:textStyle="bold" />
+
+        <View android:layout_width="match_parent" android:layout_height="@dimen/divider_large" />
+
+        <Button
+            android:id="@+id/btn_secret_album"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:icon="@drawable/ic_secret_album"
+            android:layout_margin="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="handleButton"
+            android:text="@string/bdrawer_action_secret" />
+
+        <View android:layout_width="match_parent" android:layout_height="@dimen/divider_large" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/tab_more_fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -4,45 +4,52 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.FrameLayout
 import android.widget.ImageButton
-import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.add
+import androidx.fragment.app.commit
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.button.MaterialButton
 
-class ViewImageActivity : AppCompatActivity() {
+class SecretActivity : AppCompatActivity() {
     var bottomSheetBehavior: BottomSheetBehavior<BottomNavigationView>? = null
-    var bottomSheetExpandButton: ImageButton? = null
+    var bottomSheetExpandButton: MaterialButton? = null
     var bottomDrawerDim: View? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Reset: splash screen "theme" -> default theme
-        setTheme(R.style.Theme_GalleryOne)
-
         // Hide action bar (title bar)
         supportActionBar?.hide()
 
+        // Set layout
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_view_image)
+        setContentView(R.layout.activity_secret)
 
-        bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.bdrawer_view_image))
-        bottomSheetExpandButton = findViewById(R.id.btn_bdrawer_view_image_expand)
-        bottomDrawerDim = findViewById(R.id.bdrawer_view_image_dim)
+        // Fragment: populate containers with fragments (default tab, preference)
+        if (savedInstanceState == null) {
+            supportFragmentManager.commit {
+                setReorderingAllowed(true)
+                add<SecretFragment>(R.id.secret_fragment_container)
+            }
+        }
 
-        // Behavior
-        bottomSheetBehavior?.apply { isFitToContents = true }
+        // Find elements
+        bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.bdrawer_secure))
+        bottomSheetExpandButton = findViewById(R.id.btn_bottom_sheet_expand)
+        bottomDrawerDim = findViewById(R.id.bdrawer_secret_dim)
+
+        // Bottom sheet behavior: skip HALF_COLLAPSED
+        bottomSheetBehavior!!.apply { isFitToContents = true }
         bottomSheetBehavior!!.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 when (newState) {
                     BottomSheetBehavior.STATE_COLLAPSED -> {
                         bottomDrawerDim?.visibility = View.GONE
-                        bottomSheetExpandButton?.setImageDrawable(ContextCompat.getDrawable(this@ViewImageActivity, R.drawable.ic_bdrawer_up))
+                        bottomSheetExpandButton?.icon = ContextCompat.getDrawable(this@SecretActivity, R.drawable.ic_bdrawer_up)
                     }
                     BottomSheetBehavior.STATE_EXPANDED -> {
                         bottomDrawerDim?.visibility = View.VISIBLE
-                        bottomSheetExpandButton?.setImageDrawable(ContextCompat.getDrawable(this@ViewImageActivity, R.drawable.ic_bdrawer_down))
+                        bottomSheetExpandButton?.icon = ContextCompat.getDrawable(this@SecretActivity, R.drawable.ic_bdrawer_down)
                     }
                     else -> { }
                 }
@@ -69,9 +76,9 @@ class ViewImageActivity : AppCompatActivity() {
         }
     }
 
-    fun closeViewer(view: View) {
+    fun closeSecret(view: View) {
         when (view.id) {
-            R.id.btn_close_viewer -> finish()
+            R.id.btn_close_secret -> finish()
             else -> {}
         }
     }

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:layout_margin="8dp"
     android:orientation="vertical"
-    tools:context=".SecureGalleryActivity">
+    tools:context=".SecretActivity">
 
     <LinearLayout
         android:id="@+id/placeholder"
@@ -16,7 +16,7 @@
         android:alpha="0.5"
         android:gravity="center"
         android:orientation="vertical"
-        android:divider="@drawable/divider_empty"
+        android:divider="@drawable/empty_8dp"
         android:showDividers="middle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

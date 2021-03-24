@@ -2,6 +2,12 @@
     <!-- App branding -->
     <string name="app_name" translatable="false">Gallery One</string>
 
+    <!-- Secret album -->
+    <string name="secret_album">Secret album</string>
+    <string name="bdrawer_secret_header_more">More</string>
+    <string name="btn_secret_album_exit">Close secret album</string>
+    <string name="btn_secret_album_passcode">Change passcode</string>
+
     <!-- Placeholder -->
     <string name="placeholder_card_details" translatable="false">Placeholder string</string>
     <string name="placeholder_tab_all">All your photos will appear here.</string>
@@ -10,18 +16,33 @@
     <string name="placeholder_tab_face">All recognized faces will appear here.</string>
     <string name="placeholder_secure">Your secrets will appear here.</string>
 
-    <!-- Bottom nav -->
+    <!-- Bottom drawer: Navigation -->
     <string name="tab_all">All</string>
     <string name="tab_album">Albums</string>
     <string name="tab_date">Date</string>
     <string name="tab_face">People</string>
-    <string name="tab_settings">More</string>
 
-    <!-- Camera action bar -->
-    <string name="action_new_photo">Take photo</string>
-    <string name="action_new_video">Record video</string>
+    <!-- Bottom drawer: Headers -->
+    <string name="bdrawer_header_create">Create new</string>
+    <string name="bdrawer_header_viewmode">View mode for current tab</string>
+    <string name="bdrawer_header_settings_not_expanded">Pull up for More ↑</string>
+    <string name="bdrawer_header_settings">More</string>
+
+    <!-- Bottom drawer: Actions -->
+    <string name="bdrawer_action_new_album">Album</string>
+    <string name="bdrawer_action_new_photo">Photo</string>
+    <string name="bdrawer_action_new_video">Video</string>
+    <string name="bdrawer_action_secret">Secret album</string>
+
+    <!-- Bottom drawer: View modes -->
+    <string name="bdrawer_viewmode_list">List</string>
+    <string name="bdrawer_viewmode_grid_2">2</string>
+    <string name="bdrawer_viewmode_grid_3">3</string>
+    <string name="bdrawer_viewmode_grid_4">4</string>
+    <string name="bdrawer_viewmode_grid_5">5</string>
 
     <!-- Image bottom sheet: Actions -->
+    <string name="action_close_viewer">Close viewer</string>
     <string name="action_delete">Delete</string>
     <string name="action_favorite">Add to favorite</string>
     <string name="action_edit">Edit</string>
@@ -32,6 +53,7 @@
     <string name="action_wallpaper">Set as wallpaper</string>
 
     <!-- Image bottom sheet: Details -->
+    <string name="info_file_name">Name</string>
     <string name="info_location">Location</string>
     <string name="info_timestamp">Timestamp</string>
     <string name="info_resolution">Resolution</string>
@@ -41,11 +63,9 @@
     <!-- Settings: headers -->
     <string name="settings_header_theme">Theme</string>
     <string name="settings_header_view">View mode (per tab)</string>
-    <string name="settings_header_secret">Secret album</string>
 
     <!-- Settings: items -->
     <string name="settings_theme_base">Base theme</string>
-    <string name="settings_secret_passcode_change">Change passcode</string>
 
     <!-- Settings: values for Base theme -->
     <string name="settings_theme_base_value_follow_system">Follow system</string>
@@ -53,7 +73,6 @@
     <string name="settings_theme_base_value_dark">Dark</string>
 
     <!-- Settings: values for View mode -->
-    <string name="settings_view_secret_album">Secret album</string>
     <string name="settings_view_value_grid_2">Grid (2 columns)</string>
     <string name="settings_view_value_grid_3">Grid (3 columns)</string>
     <string name="settings_view_value_grid_4">Grid (4 columns)</string>
