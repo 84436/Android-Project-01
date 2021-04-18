@@ -25,8 +25,7 @@
     <!-- Bottom drawer: Headers -->
     <string name="bdrawer_header_create">Create new</string>
     <string name="bdrawer_header_viewmode">View mode for current tab</string>
-    <string name="bdrawer_header_settings_not_expanded">Pull up for More ↑</string>
-    <string name="bdrawer_header_settings">More</string>
+    <string name="bdrawer_header_settings">Settings &amp; More</string>
 
     <!-- Bottom drawer: Actions -->
     <string name="bdrawer_action_new_album">Album</string>
@@ -40,6 +39,11 @@
     <string name="bdrawer_viewmode_grid_3">3</string>
     <string name="bdrawer_viewmode_grid_4">4</string>
     <string name="bdrawer_viewmode_grid_5">5</string>
+
+    <!-- Bottom drawer: More -->
+    <string name="bdrawer_more_theme">Theme</string>
+    <string name="bdrawer_more_language">Language</string>
+    <string name="bdrawer_more_about">About</string>
 
     <!-- Image bottom sheet: Actions -->
     <string name="action_close_viewer">Close viewer</string>
@@ -60,22 +64,14 @@
     <string name="info_file_size">File size</string>
     <string name="info_file_path">File path</string>
 
-    <!-- Settings: headers -->
-    <string name="settings_header_theme">Theme</string>
-    <string name="settings_header_view">View mode (per tab)</string>
+    <!-- About dialog -->
+    <string name="about_intro">
+        A simple photo viewing and editing app. Part of the Introduction to Android course. There\'s also a nice secret album included: tap and hold "About" button in the bottom drawer to open. Tap and hold "Move" button on an image/video to move it into here.
+    </string>
+    <string name="about_people" translatable="false">
+        fit@hcmus: 18CLC-KTPM2\n
+        18127221 Bùi Văn Thiện\n
+        18127252 Đinh Thành Việt
+    </string>
 
-    <!-- Settings: items -->
-    <string name="settings_theme_base">Base theme</string>
-
-    <!-- Settings: values for Base theme -->
-    <string name="settings_theme_base_value_follow_system">Follow system</string>
-    <string name="settings_theme_base_value_light">Light</string>
-    <string name="settings_theme_base_value_dark">Dark</string>
-
-    <!-- Settings: values for View mode -->
-    <string name="settings_view_value_grid_2">Grid (2 columns)</string>
-    <string name="settings_view_value_grid_3">Grid (3 columns)</string>
-    <string name="settings_view_value_grid_4">Grid (4 columns)</string>
-    <string name="settings_view_value_grid_5">Grid (5 columns)</string>
-    <string name="settings_view_value_list">List</string>
 </resources>

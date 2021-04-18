@@ -44,12 +44,12 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 
     // Fragments
-    implementation 'androidx.fragment:fragment-ktx:1.3.0'
+    implementation 'androidx.fragment:fragment-ktx:1.3.2'
 
     // Preferences
     implementation 'androidx.preference:preference-ktx:1.1.1'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
-    implementation 'androidx.preference:preference:1.1.1'
+    implementation 'androidx.preference:preference-ktx:1.1.1'
 
     // Tests
     testImplementation 'junit:junit:4.13.2'
