@@ -1,37 +1,12 @@
 <resources>
-    <string-array name="view_mode_entries">
-        <item>@string/settings_view_value_grid_3</item>
-        <item>@string/settings_view_value_grid_4</item>
-        <item>@string/settings_view_value_grid_5</item>
-        <item>@string/settings_view_value_list</item>
+    <string-array name="settings_theme">
+        <item>Follow system</item>
+        <item>Day</item>
+        <item>Night</item>
     </string-array>
 
-    <string-array name="view_mode_simple_entries">
-        <item>@string/settings_view_value_grid_2</item>
-        <item>@string/settings_view_value_list</item>
-    </string-array>
-
-    <string-array name="view_mode_values">
-        <item>grid_3</item>
-        <item>grid_4</item>
-        <item>grid_5</item>
-        <item>list</item>
-    </string-array>
-
-    <string-array name="view_mode_simple_values">
-        <item>grid_2</item>
-        <item>list</item>
-    </string-array>
-
-    <string-array name="theme_base_entries">
-        <item>@string/settings_theme_base_value_follow_system</item>
-        <item>@string/settings_theme_base_value_light</item>
-        <item>@string/settings_theme_base_value_dark</item>
-    </string-array>
-
-    <string-array name="theme_base_values">
-        <item>follow_system</item>
-        <item>light</item>
-        <item>dark</item>
+    <string-array name="settings_language">
+        <item>English</item>
+        <item>Vietnamese</item>
     </string-array>
 </resources>
