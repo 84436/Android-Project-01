@@ -13,6 +13,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
@@ -23,6 +25,8 @@ class MainActivity : AppCompatActivity() {
     var bottomSheetSettingsHint: TextView? = null
     var bottomSheetExpandButton: ImageButton? = null
     var bottomDrawerDim: View? = null
+    //
+    private lateinit var blogAdapter: RecycleAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Hide action bar (title bar)
@@ -31,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         // Set layout
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         // Fragment: populate containers with fragments (default tab, preference)
         if (savedInstanceState == null) {
@@ -167,4 +172,5 @@ class MainActivity : AppCompatActivity() {
             else -> {}
         }
     }
+
 }
