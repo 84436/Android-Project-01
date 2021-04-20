@@ -31,14 +31,6 @@ import hcmus.android.gallery1.helpers.PreferenceFacility
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
-
-    // Finding bottom sheet + navbar
-    var navbar: BottomNavigationView? = null
-    var bottomSheetBehavior: BottomSheetBehavior<BottomNavigationView>? = null
-    var bottomSheetSettingsHint: TextView? = null
-    var bottomSheetExpandButton: ImageButton? = null
-    var bottomDrawerDim: View? = null
-    //
     private lateinit var blogAdapter: RecycleAdapter
 
     private lateinit var prefs: PreferenceFacility
