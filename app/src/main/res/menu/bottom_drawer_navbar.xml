@@ -18,10 +18,4 @@
         android:icon="@drawable/ic_tab_date"
         android:enabled="true"
         />
-    <item
-        android:id="@+id/tab_face"
-        android:title="@string/tab_face"
-        android:icon="@drawable/ic_tab_face"
-        android:enabled="true"
-        />
 </menu>

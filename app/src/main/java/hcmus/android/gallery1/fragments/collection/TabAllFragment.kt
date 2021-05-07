@@ -1,21 +1,19 @@
-package hcmus.android.gallery1
+package hcmus.android.gallery1.fragments.collection
 
-import android.content.ActivityNotFoundException
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.provider.MediaStore
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import hcmus.android.gallery1.R
+import hcmus.android.gallery1.RecycleAdapter
+import hcmus.android.gallery1.data.DataSource
+import hcmus.android.gallery1.fragments.base.ImageListFragment
 import hcmus.android.gallery1.helpers.PreferenceFacility
 
-class MainAllPhotosFragment : Fragment() {
+class TabAllFragment: ImageListFragment() {
     private lateinit var blogAdapter: RecycleAdapter
     private lateinit var layoutManager: RecyclerView.LayoutManager
 

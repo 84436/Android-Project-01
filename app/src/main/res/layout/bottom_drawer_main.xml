@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -39,6 +38,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:backgroundTint="@color/background2"
             app:elevation="0dp"
+            app:labelVisibilityMode="selected"
             app:menu="@menu/bottom_drawer_navbar" />
 
         <ImageButton
@@ -159,33 +159,6 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_viewmode_date_grid_2"
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/bdrawer_viewmode_grid_2"
-                app:icon="@drawable/ic_view_grid" />
-
-        </com.google.android.material.button.MaterialButtonToggleGroup>
-
-        <com.google.android.material.button.MaterialButtonToggleGroup
-            android:id="@+id/viewmode_face"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:selectionRequired="true"
-            app:singleSelection="true"
-            android:visibility="gone" >
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_viewmode_face_list"
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/bdrawer_viewmode_list" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_viewmode_face_grid_2"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

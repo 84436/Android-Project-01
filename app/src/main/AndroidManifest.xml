@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="hcmus.android.gallery1">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
 
     <application
@@ -12,8 +14,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GalleryOne">
-
-
         <activity
             android:name=".SplashActivity"
             android:theme="@style/Theme.GalleryOne.SplashScreen">
@@ -24,25 +24,11 @@
         </activity>
 
         <activity android:name=".MainActivity" />
-
-        <activity
-            android:name=".SecretActivity"
-            android:label="Secret album">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".ViewImageActivity"
-            android:label="View Image">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
+        <activity android:name=".Activity2"
+            android:configChanges="keyboard|orientation|screenSize"
+            />
+        <activity android:name=".SecretActivity" />
+        <activity android:name=".ViewImageActivity" />
     </application>
 
 </manifest>

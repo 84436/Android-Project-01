@@ -2,6 +2,7 @@ package hcmus.android.gallery1.helpers
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
+import hcmus.android.gallery1.R
 
 class PreferenceFacility(private val prefs: SharedPreferences) {
     // Sanity check
@@ -46,4 +47,14 @@ class PreferenceFacility(private val prefs: SharedPreferences) {
     var language: String
         get() { return prefs.getString("language", "en") as String }
         set(value) { prefs.edit(commit = true) { putString("language", value) } }
+
+    // Theme (fetch actual resource ID)
+    val themeR: Int
+        get() {
+            return when (theme) {
+                "day" -> R.style.Theme_GalleryOne
+                "night" -> R.style.Theme_GalleryOne
+                else -> R.style.Theme_GalleryOne // fallback
+            }
+        }
 }
