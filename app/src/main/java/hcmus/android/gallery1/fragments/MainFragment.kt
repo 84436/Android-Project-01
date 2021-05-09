@@ -186,6 +186,7 @@ class MainFragment : Fragment() {
         // Add listeners
 
         viewModeSelectorAll.addOnButtonCheckedListener { _, checkedId, _ ->
+            // Write to settings
             when (checkedId) {
                 R.id.btn_viewmode_all_list -> {
                     globalPrefs.setViewMode("all", "list")
@@ -200,7 +201,13 @@ class MainFragment : Fragment() {
                     globalPrefs.setViewMode("all", "grid_5")
                 }
             }
+
+            // Dirty reload current fragment
+            childFragmentManager.commit {
+                replace(R.id.main_fragment_container, TabAllFragment())
+            }
         }
+
         viewModeSelectorAlbum.addOnButtonCheckedListener { _, checkedId, _ ->
             when (checkedId) {
                 R.id.btn_viewmode_album_list -> {
@@ -209,6 +216,11 @@ class MainFragment : Fragment() {
                 R.id.btn_viewmode_album_grid_2 -> {
                     globalPrefs.setViewMode("album", "grid_2")
                 }
+            }
+
+            // Dirty reload current fragment
+            childFragmentManager.commit {
+                replace(R.id.main_fragment_container, TabAlbumFragment())
             }
         }
 
