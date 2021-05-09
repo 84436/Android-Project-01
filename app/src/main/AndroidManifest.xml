@@ -6,6 +6,10 @@
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
+    <uses-permission
+        android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="false"
@@ -23,11 +27,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity" />
-        <activity android:name=".Activity2"
-            android:configChanges="keyboard|orientation|screenSize"
-            />
-        <activity android:name=".SecretActivity" />
+        <activity android:name=".Activity2" android:configChanges="keyboard|orientation|screenSize|uiMode" />
         <activity android:name=".ViewImageActivity" />
     </application>
 
