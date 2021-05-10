@@ -44,10 +44,30 @@ class Activity2 : AppCompatActivity() {
             )
         }
 
+        // Set animations between fragments
+        /* globalFragmentManager.commit {
+            setCustomAnimations(
+                R.anim.slide_in,    // enter
+                R.anim.fade_out,    // exit
+                R.anim.fade_in,     // pop_enter
+                R.anim.slide_out    // pop_exit
+            )
+        } */
+
         // Insert first piece of fragment
         globalFragmentManager.commit {
             setReorderingAllowed(true)
             add(R.id.fragment_container, MainFragment())
+        }
+    }
+
+    override fun onBackPressed() {
+        // super.onBackPressed()
+        if (globalFragmentManager.backStackEntryCount > 0) {
+            globalFragmentManager.popBackStack()
+        }
+        else {
+            super.onBackPressed()
         }
     }
 

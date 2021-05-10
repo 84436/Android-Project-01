@@ -1,5 +1,6 @@
 package hcmus.android.gallery1.adapters
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -7,11 +8,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.commit
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import hcmus.android.gallery1.R
+import hcmus.android.gallery1.ViewImageActivity
 import hcmus.android.gallery1.data.Item
+import hcmus.android.gallery1.fragments.image.ViewImageFragment
+import hcmus.android.gallery1.globalFragmentManager
 
 class ItemListAdapter(private val items: List<Item>, private val isCompactLayout: Boolean = false)
     : RecyclerView.Adapter<ItemListAdapter.ViewHolder>() {
@@ -43,8 +48,13 @@ class ItemListAdapter(private val items: List<Item>, private val isCompactLayout
             name.text = item.fileName
         }
 
-        image.setOnClickListener {
-            Toast.makeText(image.context, "Image ID = ${item.id}", Toast.LENGTH_SHORT).show()
+        holder.itemView.setOnClickListener {
+            val intent = Intent(it.context, ViewImageActivity::class.java).apply {
+                putExtra("id", item.id)
+                putExtra("filename", item.fileName)
+                putExtra("uri", item.getUri())
+            }
+            it.context.startActivity(intent)
         }
     }
 }

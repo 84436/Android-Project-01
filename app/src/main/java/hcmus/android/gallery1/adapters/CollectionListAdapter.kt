@@ -31,17 +31,20 @@ class CollectionListAdapter(private val items: List<Collection>, private val isC
         val item = items[position]
 
         val image = holder.itemView.findViewById<ImageView>(R.id.collection_thumbnail)
+        Glide.with(image.context)
+             .load(item.thumbnailUri)
+             .error(R.drawable.placeholder_item)
+             .transition(DrawableTransitionOptions.withCrossFade(250)) // ms
+             .into(image)
 
         val name = holder.itemView.findViewById<TextView>(R.id.collection_name)
         name.text = item.name
 
-        if (isCompactLayout) {
-            val count = holder.itemView.findViewById<TextView>(R.id.collection_count)
-            count.text = "${item.items.size}"
-        }
+        val count = holder.itemView.findViewById<TextView>(R.id.collection_count)
+        count.text = "${item.itemCount}"
 
-        image.setOnClickListener {
-            Toast.makeText(image.context, "Image ID = ${item.id}", Toast.LENGTH_SHORT).show()
+        holder.itemView.setOnClickListener {
+            Toast.makeText(image.context, "Collection ID = ${item.id}", Toast.LENGTH_SHORT).show()
         }
     }
 }

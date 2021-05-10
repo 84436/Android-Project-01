@@ -14,8 +14,8 @@
         android:visibility="gone"
         android:background="@android:color/black" />
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/view_pager"
+    <ImageView
+        android:id="@+id/image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/bdrawer_peek_height"

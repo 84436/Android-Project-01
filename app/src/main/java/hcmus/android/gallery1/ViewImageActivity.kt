@@ -3,19 +3,19 @@ package hcmus.android.gallery1
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.FrameLayout
 import android.widget.ImageButton
-import android.widget.LinearLayout
+import android.widget.ImageView
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.button.MaterialButton
+import hcmus.android.gallery1.data.Item
 
 class ViewImageActivity : AppCompatActivity() {
     var bottomSheetBehavior: BottomSheetBehavior<BottomNavigationView>? = null
     var bottomSheetExpandButton: ImageButton? = null
     var bottomDrawerDim: View? = null
+    private lateinit var item: Item
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Reset: splash screen "theme" -> default theme
@@ -25,7 +25,7 @@ class ViewImageActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_view_image)
+        setContentView(R.layout.fragment_view_image_nopager)
 
         bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.bdrawer_view_image))
         bottomSheetExpandButton = findViewById(R.id.btn_bdrawer_view_image_expand)
@@ -67,6 +67,28 @@ class ViewImageActivity : AppCompatActivity() {
                 }
             }
         }
+
+        // Populate
+        populateImageAndInfo()
+    }
+
+    private fun populateImageAndInfo() {
+        val imageHolder = findViewById<ImageView>(R.id.image)
+
+        val itemId = intent.getLongExtra("id", 0)
+        val itemFileName = intent.getStringExtra("filename")
+        val itemUri = intent.getStringExtra("uri")
+
+        item = Item(
+            id = itemId,
+            fileName = itemFileName!!,
+            uri = itemUri!!
+        )
+
+        Glide.with(imageHolder.context)
+            .load(item.getUri())
+            .error(R.drawable.placeholder_item)
+            .into(imageHolder)
     }
 
     fun closeViewer(view: View) {

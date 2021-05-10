@@ -16,12 +16,13 @@ import androidx.annotation.RequiresApi
  *     - Sort order (the "ORDER BY" clause)
  */
 
-fun ContentResolver.getCollections() : List<Collection> {
+// Get all collections by name (default) or by date
+fun ContentResolver.getCollections(byDate: Boolean = false) : List<Collection> {
     val r : MutableSet<Collection> = mutableSetOf()
 
     val msCursor = this.query(
         DEFAULT_CONTENT_URI,
-        arrayOf(MediaStore.Files.FileColumns.BUCKET_ID, MediaStore.Files.FileColumns.BUCKET_DISPLAY_NAME),
+        arrayOf(MediaStore.Files.FileColumns._ID, MediaStore.Files.FileColumns.BUCKET_ID, MediaStore.Files.FileColumns.BUCKET_DISPLAY_NAME),
         SELECTION_ONLY_IMAGES_OR_VIDEO,
         null,
         DEFAULT_SORT_ORDER_COLLECTIONS
@@ -29,16 +30,39 @@ fun ContentResolver.getCollections() : List<Collection> {
 
     msCursor?.use {
         while (it.moveToNext()) {
-            r += Collection(
-                id = it.getLong(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.BUCKET_ID)),
-                name = it.getString(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.BUCKET_DISPLAY_NAME))
-            )
+            val bucketId = it.getLong(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.BUCKET_ID))
+            var collectionExists = false
+
+            // Does the current collection exist in the returning set "r"?
+            for (each in r) {
+                if (each.id == bucketId) {
+                    each.itemCount += 1
+                    collectionExists = true
+                    break
+                }
+            }
+
+            // Again, does the current collection exist in the returning set "r"?
+            if (collectionExists) {
+                continue
+            }
+            else {
+                val bucketDisplayName = it.getString(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.BUCKET_DISPLAY_NAME))
+                val bucketThumbnailUri = "$DEFAULT_CONTENT_URI/${it.getLong(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns._ID))}"
+                r += Collection(
+                    id = bucketId,
+                    name = bucketDisplayName,
+                    thumbnailUri = bucketThumbnailUri,
+                    itemCount = 1
+                )
+            }
         }
     }
 
     return r.toList()
 }
 
+ // Get items (images/videos) in a collection
 fun ContentResolver.getItems(collectionId: Long? = null) : List<Item> {
     val r : MutableSet<Item> = mutableSetOf()
 

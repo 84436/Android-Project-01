@@ -5,7 +5,9 @@ import hcmus.android.gallery1.data.getItems
 
 data class Collection (
     val id: Long,
-    var name: String,
+    val name: String,
+    val thumbnailUri: String,
+    var itemCount: Int,
     var isPopulated: Boolean = false,
 
     // Lazy-load fields
