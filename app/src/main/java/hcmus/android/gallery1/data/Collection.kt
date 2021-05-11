@@ -1,5 +1,6 @@
 package hcmus.android.gallery1.data
 
+import android.content.ClipData
 import android.content.ContentResolver
 import hcmus.android.gallery1.data.getItems
 
@@ -11,7 +12,7 @@ data class Collection (
     var isPopulated: Boolean = false,
 
     // Lazy-load fields
-    var items: List<Item> = emptyList()
+    var items: List<ClipData.Item> = emptyList()
 )
 
 {

@@ -44,7 +44,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 
     // Fragments
-    implementation 'androidx.fragment:fragment-ktx:1.3.2'
+    implementation 'androidx.fragment:fragment-ktx:1.3.3'
 
     // Preferences
     implementation 'androidx.preference:preference-ktx:1.1.1'
@@ -62,7 +62,7 @@ dependencies {
 
     // Recyclerview
     def recyclerview_version = "1.0.0"
-    implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
+    implementation "androidx.recyclerview:recyclerview:1.2.0"
 
     //glide
     implementation "com.github.bumptech.glide:glide:4.12.0"
