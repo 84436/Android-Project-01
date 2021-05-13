@@ -1,5 +1,6 @@
 package hcmus.android.gallery1.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import hcmus.android.gallery1.R
 import hcmus.android.gallery1.data.Collection
-import hcmus.android.gallery1.data.Item
+import hcmus.android.gallery1.fragments.collection.ImageInAlbumFragment
 
 class CollectionListAdapter(private val items: List<Collection>, private val isCompactLayout: Boolean = false)
     : RecyclerView.Adapter<CollectionListAdapter.ViewHolder>() {
@@ -45,6 +46,14 @@ class CollectionListAdapter(private val items: List<Collection>, private val isC
 
         holder.itemView.setOnClickListener {
             Toast.makeText(image.context, "Collection ID = ${item.id}", Toast.LENGTH_SHORT).show()
+
+
+
+
         }
     }
+
+
+
+
 }

@@ -14,6 +14,11 @@ val SELECTION_ONLY_IMAGES_OR_VIDEO = "" +
         " OR " +
         "${MediaStore.Files.FileColumns.MEDIA_TYPE} = ${MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO}"
 
+val SELECTION_BY_DATE = "" +
+        "${MediaStore.Files.FileColumns.DATE_ADDED} = ${MediaStore.Files.FileColumns.DATE_ADDED}" +
+        " OR " +
+        "${MediaStore.Files.FileColumns.DATE_ADDED} = ${MediaStore.Files.FileColumns.DATE_ADDED}"
+
 
 // Default ORDER BY clause for items in a collection:
 // latest file first
@@ -27,3 +32,9 @@ val DEFAULT_SORT_ORDER_ITEMS = "" +
 val DEFAULT_SORT_ORDER_COLLECTIONS = "" +
         "${MediaStore.Files.FileColumns.BUCKET_DISPLAY_NAME} ASC," +
         "${MediaStore.Files.FileColumns.DATE_MODIFIED} DESC"
+
+
+
+
+
+

@@ -2,6 +2,7 @@
 
 import android.content.ContentResolver
 import android.content.ContentUris
+import android.database.Cursor
 import android.os.Build
 import android.provider.BaseColumns
 import android.provider.MediaStore
@@ -20,13 +21,30 @@ import androidx.annotation.RequiresApi
 fun ContentResolver.getCollections(byDate: Boolean = false) : List<Collection> {
     val r : MutableSet<Collection> = mutableSetOf()
 
-    val msCursor = this.query(
+    val customSelection = if (byDate==true) {
+        //SELECTION_BY_DATE
+        SELECTION_ONLY_IMAGES_OR_VIDEO
+
+
+    }
+    else {
+        SELECTION_ONLY_IMAGES_OR_VIDEO
+    }
+
+     val msCursor = this.query(
         DEFAULT_CONTENT_URI,
-        arrayOf(MediaStore.Files.FileColumns._ID, MediaStore.Files.FileColumns.BUCKET_ID, MediaStore.Files.FileColumns.BUCKET_DISPLAY_NAME),
-        SELECTION_ONLY_IMAGES_OR_VIDEO,
+        arrayOf(
+            MediaStore.Files.FileColumns._ID,
+            MediaStore.Files.FileColumns.BUCKET_ID,
+            MediaStore.Files.FileColumns.BUCKET_DISPLAY_NAME
+        ),
+        customSelection,
         null,
         DEFAULT_SORT_ORDER_COLLECTIONS
     )
+
+
+
 
     msCursor?.use {
         while (it.moveToNext()) {

@@ -2,14 +2,22 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="8dp"
-    android:orientation="vertical"
-    tools:context=".MainDateFragment">
+    android:orientation="vertical">
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:spanCount="2"
+        tools:listitem="@layout/list_collection_compact"
+        />
+
+    <!-- <LinearLayout
         android:id="@+id/placeholder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,14 +34,13 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:src="@drawable/ic_tab_date" />
+            android:src="@drawable/ic_tab_album" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="@string/placeholder_tab_date" />
-
-    </LinearLayout>
+            android:text="@string/placeholder_tab_album" />
+    </LinearLayout> -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

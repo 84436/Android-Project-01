@@ -13,9 +13,13 @@ data class Collection (
 
     // Lazy-load fields
     var items: List<ClipData.Item> = emptyList()
+
 )
 
 {
+    fun getListItem():List<ClipData.Item>{
+        return items
+    }
     fun populate() {
         if (!isPopulated) {
             isPopulated = true
