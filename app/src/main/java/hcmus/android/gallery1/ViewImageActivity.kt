@@ -1,10 +1,13 @@
 package hcmus.android.gallery1
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -16,6 +19,7 @@ class ViewImageActivity : AppCompatActivity() {
     var bottomSheetExpandButton: ImageButton? = null
     var bottomDrawerDim: View? = null
     private lateinit var item: Item
+    private val CREATE_FILE: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Reset: splash screen "theme" -> default theme
@@ -23,6 +27,9 @@ class ViewImageActivity : AppCompatActivity() {
 
         // Hide action bar (title bar)
         supportActionBar?.hide()
+
+        // Hide status bar icons
+        setLowProfileUI(true)
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_view_image_nopager)
@@ -92,9 +99,78 @@ class ViewImageActivity : AppCompatActivity() {
     }
 
     fun closeViewer(view: View) {
-        when (view.id) {
-            R.id.btn_close_viewer -> finish()
-            else -> {}
+        if (view.id == R.id.btn_close_viewer) {
+            setLowProfileUI(false)
+            finish()
+        }
+    }
+
+    fun openEditor(view: View) {
+        if (view.id == R.id.btn_edit) {
+            setLowProfileUI(false)
+            val intent = Intent(this, EditImageActivity::class.java)
+            intent.putExtra("uri", item.getUri())
+            startActivity(intent)
+        }
+    }
+
+    fun shareImage(view: View) {
+        if (view.id == R.id.btn_share) {
+            val intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_STREAM, Uri.parse(item.getUri()))
+                type = "image/*"
+            }
+            startActivity(Intent.createChooser(intent, "Send to"))
+        }
+    }
+
+    fun setAs(view: View) {
+        if (view.id == R.id.btn_wallpaper) {
+            val intent = Intent().apply {
+                action = Intent.ACTION_ATTACH_DATA
+                addCategory(Intent.CATEGORY_DEFAULT)
+                setDataAndType(Uri.parse(item.getUri()), "image/*")
+                putExtra("mimeType", "image/*")
+            }
+            startActivity(Intent.createChooser(intent, "Set as"))
+        }
+    }
+
+    fun deleteImage(view: View) {
+        if (view.id == R.id.btn_delete) {
+            contentResolver.delete(Uri.parse(item.getUri()), null, null)
+            Toast.makeText(this, "Image deleted", Toast.LENGTH_SHORT).show()
+            finish()
+        }
+    }
+
+    fun copyAsFile(view: View) {
+        if (view.id == R.id.btn_copy) {
+            /* val intent = Intent().apply {
+                action = Intent.ACTION_CREATE_DOCUMENT
+                addCategory(Intent.CATEGORY_OPENABLE)
+                type = "image"
+                putExtra(Intent.EXTRA_TITLE, item.fileName)
+            }
+            startActivityForResult(intent, CREATE_FILE) */
+        }
+    }
+
+    fun moveAsFile(view: View) {
+        if (view.id == R.id.btn_move) {
+
+        }
+    }
+
+    // Temporarily turn on "lights out" mode for status bar and navigation bar.
+    // This usually means hiding nearly everything and leaving with only the clock and battery status.
+    // https://stackoverflow.com/a/44433844
+    private fun setLowProfileUI(isLowProfile: Boolean) {
+        this.window?.decorView?.systemUiVisibility = if (isLowProfile) {
+            View.SYSTEM_UI_FLAG_LOW_PROFILE
+        } else {
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE
         }
     }
 }
