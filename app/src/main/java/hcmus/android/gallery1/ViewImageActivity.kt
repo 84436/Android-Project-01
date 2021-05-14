@@ -4,7 +4,9 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 
@@ -13,6 +15,10 @@ import android.widget.TextView
 import android.widget.Toast
 
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -25,6 +31,8 @@ class ViewImageActivity : AppCompatActivity() {
     var bottomDrawerDim: View? = null
     private lateinit var item: Item
     private val CREATE_FILE: Int = 1
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Reset: splash screen "theme" -> default theme
@@ -82,9 +90,16 @@ class ViewImageActivity : AppCompatActivity() {
 
         // Populate
         populateImageAndInfo()
+
+    }
+    private inner class ScreenSlidePagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
+        override fun getItemCount(): Int = 5
+
+        override fun createFragment(position: Int): Fragment = slideActivityFragment()
     }
 
     private fun populateImageAndInfo() {
+
         val imageHolder = findViewById<ImageView>(R.id.image)
 
 
@@ -103,6 +118,8 @@ class ViewImageActivity : AppCompatActivity() {
             .load(item.getUri())
             .error(R.drawable.placeholder_item)
             .into(imageHolder)
+
+
 
         val image_name=findViewById<TextView>(R.id.info_file_name)
         image_name.text=item.fileName
@@ -197,5 +214,6 @@ class ViewImageActivity : AppCompatActivity() {
             View.SYSTEM_UI_FLAG_LAYOUT_STABLE
         }
     }
+
 
 }

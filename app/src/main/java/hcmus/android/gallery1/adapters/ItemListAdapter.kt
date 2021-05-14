@@ -15,7 +15,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import hcmus.android.gallery1.R
 import hcmus.android.gallery1.ViewImageActivity
 import hcmus.android.gallery1.data.Item
-import hcmus.android.gallery1.fragments.image.ViewImageFragment
+//import hcmus.android.gallery1.fragments.image.ViewImageFragment
 import hcmus.android.gallery1.globalFragmentManager
 
 class ItemListAdapter(private val items: List<Item>, private val isCompactLayout: Boolean = false)
@@ -53,6 +53,7 @@ class ItemListAdapter(private val items: List<Item>, private val isCompactLayout
                 putExtra("id", item.id)
                 putExtra("filename", item.fileName)
                 putExtra("uri", item.getUri())
+                putExtra("size", items.size)
             }
             it.context.startActivity(intent)
         }
