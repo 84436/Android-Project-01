@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import hcmus.android.gallery1.data.Item
+import org.w3c.dom.Text
 
 class ViewImageActivity : AppCompatActivity() {
     var bottomSheetBehavior: BottomSheetBehavior<BottomNavigationView>? = null
@@ -75,6 +77,8 @@ class ViewImageActivity : AppCompatActivity() {
     private fun populateImageAndInfo() {
         val imageHolder = findViewById<ImageView>(R.id.image)
 
+
+
         val itemId = intent.getLongExtra("id", 0)
         val itemFileName = intent.getStringExtra("filename")
         val itemUri = intent.getStringExtra("uri")
@@ -89,6 +93,23 @@ class ViewImageActivity : AppCompatActivity() {
             .load(item.getUri())
             .error(R.drawable.placeholder_item)
             .into(imageHolder)
+
+        val image_name=findViewById<TextView>(R.id.info_file_name)
+        image_name.text=item.fileName
+
+
+        val image_time=findViewById<TextView>(R.id.info_timestamp)
+        image_time.text=item.dateModified.toString()
+
+
+
+
+        val image_fileSize=findViewById<TextView>(R.id.info_file_size)
+        image_fileSize.text=item.fileSize.toString()
+
+        val image_filePath=findViewById<TextView>(R.id.info_file_path)
+        image_filePath.text=item.filePath
+
     }
 
     fun closeViewer(view: View) {
@@ -97,4 +118,5 @@ class ViewImageActivity : AppCompatActivity() {
             else -> {}
         }
     }
+
 }

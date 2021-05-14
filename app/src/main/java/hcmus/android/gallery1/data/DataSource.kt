@@ -7,8 +7,9 @@ import android.os.Build
 import android.provider.BaseColumns
 import android.provider.MediaStore
 import androidx.annotation.RequiresApi
+import androidx.core.database.getIntOrNull
 
-/**
+ /**
  * Parameters for ContentResolver.query() (it's essentially a SQL cursor)
  *     - Content URI
  *     - Projection (columns to choose)
@@ -93,7 +94,8 @@ fun ContentResolver.getItems(collectionId: Long? = null) : List<Item> {
 
     val msCursor = this.query(
         DEFAULT_CONTENT_URI,
-        arrayOf(MediaStore.Files.FileColumns._ID, MediaStore.Files.FileColumns.DISPLAY_NAME),
+        arrayOf(MediaStore.Files.FileColumns._ID, MediaStore.Files.FileColumns.DISPLAY_NAME,MediaStore.Files.FileColumns.DATE_MODIFIED
+        ,MediaStore.Files.FileColumns.RESOLUTION,MediaStore.Files.FileColumns.SIZE,MediaStore.Files.FileColumns.RELATIVE_PATH),
         customSelection,
         null,
         DEFAULT_SORT_ORDER_ITEMS
@@ -103,7 +105,11 @@ fun ContentResolver.getItems(collectionId: Long? = null) : List<Item> {
         while (it.moveToNext()) {
             val c = Item(
                 id = it.getLong(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns._ID)),
-                fileName = it.getString(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DISPLAY_NAME))
+                dateModified=it.getLong(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DATE_MODIFIED)),
+                fileName = it.getString(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DISPLAY_NAME)),
+                filePath = it.getString(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.RELATIVE_PATH)),
+
+                fileSize = it.getLong(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.SIZE))
             )
             c.getUri()
             r += c
