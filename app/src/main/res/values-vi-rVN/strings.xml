@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Gallery One</string>
+    <string name="secret_album">Album bí mật</string>
+    <string name="bdrawer_secret_header_more">Thêm</string>
+    <string name="btn_secret_album_exit">Đóng album bí mật</string>
+    <string name="btn_secret_album_passcode">Đổi mật khẩu</string>
+    <string name="placeholder_tab_all">Tất cả ảnh của bạn sẽ hiện tại đây</string>
+    <string name="placeholder_tab_album">Tất cả album của bạn sẽ hiện tại đây</string>
+    <string name="placeholder_tab_face">Tất cả mặt của mọi người sẽ hiện tại đây</string>
+    <string name="placeholder_tab_date">Tất cả ảnh nhóm theo ngày sẽ hiện tại đây</string>
+    <string name="placeholder_secure">Ảnh bí mật của bạn sẽ hiện tại đây</string>
+    <string name="tab_all">Tất cả</string>
+    <string name="tab_album">Album</string>
+    <string name="tab_date">Ngày</string>
+    <string name="tab_face">Người</string>
+    <string name="bdrawer_header_create">Tạo mới</string>
+    <string name="bdrawer_header_viewmode">Chế độ xem tab hiện tại</string>
+    <string name="bdrawer_header_settings">Cài đặt &amp; Khác</string>
+    <string name="bdrawer_action_new_album">Album</string>
+    <string name="bdrawer_action_new_photo">Ảnh</string>
+    <string name="bdrawer_action_new_video">Video</string>
+    <string name="bdrawer_action_secret">Bí mật</string>
+    <string name="bdrawer_viewmode_list">List</string>
+    <string name="bdrawer_viewmode_grid_2">2</string>
+    <string name="bdrawer_viewmode_grid_3">3</string>
+    <string name="bdrawer_viewmode_grid_4">4</string>
+    <string name="bdrawer_viewmode_grid_5">5</string>
+    <string name="bdrawer_more_theme">Giao diện</string>
+    <string name="bdrawer_more_language">Ngôn ngữ</string>
+    <string name="bdrawer_more_about">Thông tin</string>
+    <string name="action_close_viewer">Đóng trình xem</string>
+    <string name="action_delete">Xóa</string>
+    <string name="action_favorite">Yêu thích</string>
+    <string name="action_edit">Sửa</string>
+    <string name="action_share">Chia sẻ</string>
+    <string name="action_copy">Sao chép tới</string>
+    <string name="action_move">Di chuyển tới</string>
+    <string name="action_slideshow">Bắt đầu trình chiếu</string>
+    <string name="action_wallpaper">Đặt làm ảnh nền</string>
+    <string name="info_file_name">Tên file</string>
+    <string name="info_location">Vị trí</string>
+    <string name="info_timestamp">Thời gian</string>
+    <string name="info_resolution">Độ phân giải</string>
+    <string name="info_file_size">Kích thước file</string>
+    <string name="info_file_path">Đường dẫn</string>
+    <string name="about_intro">
+        Một trình xem và sửa ảnh đơn giản. Một phần của môn Phát triển ứng dụng Android. App này cũng có đi kèm một cái album bí mật: nhấn giữ nút "Thông tin" để vào. Nhấn giữ nút "Di chuyển" khi đang xem ảnh bất kì để chuyển nó vào album bí mật này.
+    </string>
+    <string name="about_people">
+        fit@hcmus: 18CLC-KTPM2\n
+        18127221 Bùi Văn Thiện\n
+        18127252 Đinh Thành Việt\n
+        \n
+        Cùng với sự giúp đỡ của:\n
+        Xuân Kiệt + Đức Tuấn;\n
+        Quốc Huy + Thế Hiển;\n
+        Gallery3D từ AOSP;\n
+        một đống lần hỏi chị Google và anh StackOverflow;\n
+        và một đống sự giúp đỡ nhiệt tình từ mọi người mình eo.
+    </string>
+    <string name="tab_favorites">Yêu thích</string>
+    <string name="secret_passcode_enter">Nhập mật khẩu</string>
+    <string name="action_favorite_add_confirm">Đã thêm vào yêu thích</string>
+    <string name="action_favorite_remove_confirm">Đã xóa khỏi yêu thích</string>
+    <string name="action_delete_confirm">Đã xóa ảnh</string>
+    <string name="action_set_as_header">Đặt làm…</string>
+    <string name="action_send_to_header">Gửi tới…</string>
+    <string name="please_grant_permission">Vui lòng cấp quyền bộ nhớ để xem ảnh.</string>
+</resources>

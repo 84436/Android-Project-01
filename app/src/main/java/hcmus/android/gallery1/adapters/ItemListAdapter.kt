@@ -53,10 +53,7 @@ class ItemListAdapter(private val items: List<Item>, private val isCompactLayout
                 putExtra("id", item.id)
                 putExtra("filename", item.fileName)
                 putExtra("uri", item.getUri())
-                putExtra("size", item.fileSize)
-                putExtra("time",item.dateModified)
-                putExtra("resolution",item.width)
-                putExtra("path",item.filePath)
+                putExtra("size", items.size)
             }
             it.context.startActivity(intent)
         }

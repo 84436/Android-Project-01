@@ -6,7 +6,7 @@ import hcmus.android.gallery1.R
 
 class PreferenceFacility(private val prefs: SharedPreferences) {
     // Sanity check
-    val validTabs           = arrayOf("all", "album", "date", "face", "secret")
+    val validTabs           = arrayOf("all", "album", "date", "face", "secret", "fav")
     val validViews          = arrayOf("list", "grid_3", "grid_4", "grid_5")
     val validViewsLimited   = arrayOf("list", "grid_2")
     val validThemes         = arrayOf("follow_system", "day", "night")
@@ -15,7 +15,7 @@ class PreferenceFacility(private val prefs: SharedPreferences) {
     fun isValidViewMode(tab: String, mode: String): Boolean {
         if (tab !in validTabs) return false
         return when (tab) {
-            "all", "secret" -> { mode in validViews }
+            "all", "fav", "secret" -> { mode in validViews }
             else -> { mode in validViewsLimited }
         }
     }
@@ -57,4 +57,43 @@ class PreferenceFacility(private val prefs: SharedPreferences) {
                 else -> R.style.Theme_GalleryOne // fallback
             }
         }
+
+    fun getFavorites(): List<Long> {
+        val rawSet = prefs.getStringSet("favorites", setOf())
+        val returnList = mutableListOf<Long>()
+        if (rawSet != null) {
+            for (each in rawSet) {
+                returnList += each.toLong()
+            }
+        }
+        return returnList
+    }
+
+    fun isInFavorite(imageId: Long) : Boolean {
+        val rawSet = prefs.getStringSet("favorites", setOf())
+        if (rawSet != null) {
+            return (imageId.toString() in rawSet)
+        }
+        return false
+    }
+
+    fun addFavorite(imageId: Long) {
+        val currentSet = prefs.getStringSet("favorites", setOf())?.toMutableSet()
+        currentSet?.add(imageId.toString())
+        prefs.edit(commit = true) {
+            putStringSet("favorites", currentSet)
+        }
+    }
+
+    fun removeFavorite(imageId: Long) {
+        val currentSet = prefs.getStringSet("favorites", setOf())?.toMutableSet()
+        if (currentSet != null) {
+            if (imageId.toString() in currentSet) {
+                currentSet.remove(imageId.toString())
+                prefs.edit(commit = true) {
+                    putStringSet("favorites", currentSet)
+                }
+            }
+        }
+    }
 }

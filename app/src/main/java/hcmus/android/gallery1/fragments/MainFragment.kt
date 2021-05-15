@@ -22,7 +22,7 @@ import hcmus.android.gallery1.*
 import hcmus.android.gallery1.fragments.collection.TabAlbumFragment
 import hcmus.android.gallery1.fragments.collection.TabAllFragment
 import hcmus.android.gallery1.fragments.collection.TabDateFragment
-import hcmus.android.gallery1.fragments.secret.SecretAlbumFragment
+import hcmus.android.gallery1.fragments.collection.TabFavoritesFragment
 
 class MainFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -54,6 +54,7 @@ class MainFragment : Fragment() {
     private lateinit var viewModeSelectorAll: MaterialButtonToggleGroup
     private lateinit var viewModeSelectorAlbum: MaterialButtonToggleGroup
     private lateinit var viewModeSelectorDate: MaterialButtonToggleGroup
+    private lateinit var viewModeSelectorFav: MaterialButtonToggleGroup
     private lateinit var btnNewAlbum: Button
     private lateinit var btnNewPhoto: Button
     private lateinit var btnNewVideo: Button
@@ -77,6 +78,7 @@ class MainFragment : Fragment() {
         viewModeSelectorAll   = view.findViewById(R.id.viewmode_all)
         viewModeSelectorAlbum = view.findViewById(R.id.viewmode_album)
         viewModeSelectorDate  = view.findViewById(R.id.viewmode_date)
+        viewModeSelectorFav   = view.findViewById(R.id.viewmode_fav)
 
         // Bottom drawer -> Buttons
         btnNewAlbum = view.findViewById(R.id.btn_new_album)
@@ -143,6 +145,7 @@ class MainFragment : Fragment() {
                     R.id.tab_all -> replace(R.id.main_fragment_container, TabAllFragment())
                     R.id.tab_album -> replace(R.id.main_fragment_container, TabAlbumFragment())
                     R.id.tab_date -> replace(R.id.main_fragment_container, TabDateFragment())
+                    R.id.tab_favorites -> replace(R.id.main_fragment_container, TabFavoritesFragment())
                 }
             }
             setVisibleViewModeSelector(it.itemId)
@@ -180,6 +183,16 @@ class MainFragment : Fragment() {
                 "list" -> R.id.btn_viewmode_date_list
                 "grid_2" -> R.id.btn_viewmode_date_grid_2
                 else -> R.id.btn_viewmode_date_grid_2
+            }
+        )
+
+        viewModeSelectorFav.check(
+            when(globalPrefs.getViewMode("fav")) {
+                "list" -> R.id.btn_viewmode_fav_list
+                "grid_3" -> R.id.btn_viewmode_fav_grid_3
+                "grid_4" -> R.id.btn_viewmode_fav_grid_4
+                "grid_5" -> R.id.btn_viewmode_fav_grid_5
+                else -> R.id.btn_viewmode_fav_grid_3
             }
         )
 
@@ -233,6 +246,34 @@ class MainFragment : Fragment() {
                     globalPrefs.setViewMode("date", "grid_2")
                 }
             }
+
+            // Dirty reload current fragment
+            childFragmentManager.commit {
+                replace(R.id.main_fragment_container, TabDateFragment())
+            }
+        }
+
+        viewModeSelectorFav.addOnButtonCheckedListener { _, checkedId, _ ->
+            // Write to settings
+            when (checkedId) {
+                R.id.btn_viewmode_fav_list -> {
+                    globalPrefs.setViewMode("fav", "list")
+                }
+                R.id.btn_viewmode_fav_grid_3 -> {
+                    globalPrefs.setViewMode("fav", "grid_3")
+                }
+                R.id.btn_viewmode_fav_grid_4 -> {
+                    globalPrefs.setViewMode("fav", "grid_4")
+                }
+                R.id.btn_viewmode_fav_grid_5 -> {
+                    globalPrefs.setViewMode("fav", "grid_5")
+                }
+            }
+
+            // Dirty reload current fragment
+            childFragmentManager.commit {
+                replace(R.id.main_fragment_container, TabFavoritesFragment())
+            }
         }
     }
 
@@ -240,10 +281,12 @@ class MainFragment : Fragment() {
         viewModeSelectorAll.visibility = View.GONE
         viewModeSelectorAlbum.visibility = View.GONE
         viewModeSelectorDate.visibility = View.GONE
+        viewModeSelectorFav.visibility = View.GONE
         when(itemId) {
             R.id.tab_all -> viewModeSelectorAll.visibility = View.VISIBLE
             R.id.tab_album -> viewModeSelectorAlbum.visibility = View.VISIBLE
             R.id.tab_date -> viewModeSelectorDate.visibility = View.VISIBLE
+            R.id.tab_favorites -> viewModeSelectorFav.visibility = View.VISIBLE
             else -> {}
         }
     }
@@ -339,7 +382,7 @@ class MainFragment : Fragment() {
     private fun handleBtnSecret() {
         globalFragmentManager.commit {
             addToBackStack("main")
-            replace(R.id.fragment_container, SecretAlbumFragment())
+            // replace(R.id.fragment_container, SecretAlbumFragment(), "CURRENT")
         }
         bDrawerBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
     }

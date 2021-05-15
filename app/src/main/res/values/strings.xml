@@ -53,7 +53,7 @@
     <string name="action_share">Share</string>
     <string name="action_copy">Copy to…</string>
     <string name="action_move">Move to…</string>
-    <string name="action_location">Edit location tag</string>
+    <string name="action_slideshow">Start a slideshow</string>
     <string name="action_wallpaper">Set as wallpaper</string>
 
     <!-- Image bottom sheet: Details -->
@@ -64,16 +64,30 @@
     <string name="info_file_size">File size</string>
     <string name="info_file_path">File path</string>
 
+    <string name="action_favorite_add_confirm">Added to favorites</string>
+    <string name="action_favorite_remove_confirm">Removed from favorites</string>
+    <string name="action_delete_confirm">Image deleted</string>
+    <string name="action_set_as_header">Set as…</string>
+    <string name="action_send_to_header">Send to…</string>
+
     <!-- About dialog -->
     <string name="about_intro">
         A simple photo viewing and editing app. Part of the Introduction to Android course. There\'s also a nice secret album included: tap and hold "About" button in the bottom drawer to open. Tap and hold "Move" button on an image/video to move it into here.
     </string>
-    <string name="about_people" translatable="false">
+    <string name="about_people">
         fit@hcmus: 18CLC-KTPM2\n
         18127221 Bùi Văn Thiện\n
-        18127252 Đinh Thành Việt
+        18127252 Đinh Thành Việt\n
+        \n
+        Also with the help of:\n
+        Xuân Kiệt + Đức Tuấn;\n
+        Quốc Huy + Thế Hiển;\n
+        Gallery3D project from AOSP;\n
+        a whole lot of Google-fu and StackOverflow;\n
+        and an immeasurable amount of help from everyone we love.
     </string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tab_favorites">Favorites</string>
+    <string name="secret_passcode_enter">Enter passcode</string>
+    <string name="please_grant_permission">Please grant the app storage permission to read your photos.</string>
 
 </resources>

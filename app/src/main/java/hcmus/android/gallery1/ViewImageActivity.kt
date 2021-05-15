@@ -94,6 +94,22 @@ class ViewImageActivity : AppCompatActivity() {
     }
 
 
+    // A dirty workaround to disable (nearly) all buttons when an external URI is detected
+    // (i.e. an image was opened but NOT from the gallery)
+    private fun workaroundDisableButtons() {
+        val toDisableBtns: List<ImageButton> = listOf(
+            findViewById(R.id.btn_delete),
+            findViewById(R.id.btn_copy),
+            findViewById(R.id.btn_move),
+            findViewById(R.id.btn_slideshow),
+            findViewById(R.id.btn_favorite)
+        )
+        for (each in toDisableBtns) {
+            each.isEnabled = false
+            each.alpha = 0.25f
+        }
+    }
+
     private fun populateImageAndInfo() {
 
         val imageHolder = findViewById<ImageView>(R.id.image)
@@ -109,6 +125,7 @@ class ViewImageActivity : AppCompatActivity() {
         val itemPath=intent.getStringExtra("path")
 
 
+
         item = Item(
             id = itemId,
             fileName = itemFileName!!,
@@ -118,7 +135,28 @@ class ViewImageActivity : AppCompatActivity() {
             dateModified = itemTime,
             width = itemResolution
 
-        )
+        // Workaround
+        item = if (itemId == 0L) {
+            Item(
+                id = 0,
+                fileName = "unknown",
+                uri = intent.data.toString()
+            )
+        } else {
+            Item(
+                id = itemId,
+                fileName = itemFileName!!,
+                uri = itemUri!!,
+                fileSize=itemSize/1048576,
+                filePath = itemPath.toString(),
+                dateModified = itemTime,
+                width = itemResolution
+            )
+        }
+
+
+        // Workaround
+        if (itemId == 0L) workaroundDisableButtons()
 
         Glide.with(imageHolder.context)
             .load(item.getUri())
@@ -142,9 +180,6 @@ class ViewImageActivity : AppCompatActivity() {
 
         val image_filePath=findViewById<TextView>(R.id.info_file_path)
         image_filePath.text=item.filePath
-
-
-
 
     }
 
@@ -171,7 +206,7 @@ class ViewImageActivity : AppCompatActivity() {
                 putExtra(Intent.EXTRA_STREAM, Uri.parse(item.getUri()))
                 type = "image/*"
             }
-            startActivity(Intent.createChooser(intent, "Send to"))
+            startActivity(Intent.createChooser(intent, resources.getString(R.string.action_send_to_header)))
         }
     }
 
@@ -183,14 +218,14 @@ class ViewImageActivity : AppCompatActivity() {
                 setDataAndType(Uri.parse(item.getUri()), "image/*")
                 putExtra("mimeType", "image/*")
             }
-            startActivity(Intent.createChooser(intent, "Set as"))
+            startActivity(Intent.createChooser(intent, resources.getString(R.string.action_set_as_header)))
         }
     }
 
     fun deleteImage(view: View) {
         if (view.id == R.id.btn_delete) {
             contentResolver.delete(Uri.parse(item.getUri()), null, null)
-            Toast.makeText(this, "Image deleted", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, resources.getString(R.string.action_delete_confirm), Toast.LENGTH_SHORT).show()
             finish()
         }
     }
@@ -210,6 +245,19 @@ class ViewImageActivity : AppCompatActivity() {
     fun moveAsFile(view: View) {
         if (view.id == R.id.btn_move) {
 
+        }
+    }
+
+    fun toggleFavorite(view: View) {
+        if (view.id == R.id.btn_favorite) {
+            if (!globalPrefs.isInFavorite(item.id)) {
+                globalPrefs.addFavorite(item.id)
+                Toast.makeText(globalContext, resources.getString(R.string.action_favorite_add_confirm), Toast.LENGTH_SHORT).show()
+            }
+            else {
+                globalPrefs.removeFavorite(item.id)
+                Toast.makeText(globalContext, resources.getString(R.string.action_favorite_remove_confirm), Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

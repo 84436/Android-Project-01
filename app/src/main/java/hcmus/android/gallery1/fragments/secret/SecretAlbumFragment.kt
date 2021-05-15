@@ -12,6 +12,7 @@ import hcmus.android.gallery1.R
 import hcmus.android.gallery1.fragments.base.ImageListFragment
 import hcmus.android.gallery1.globalFragmentManager
 
+/*
 class SecretAlbumFragment: ImageListFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.activity_secret, container, false)
@@ -94,3 +95,4 @@ class SecretAlbumFragment: ImageListFragment() {
         }
     }
 }
+*/
