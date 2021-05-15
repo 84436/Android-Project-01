@@ -45,7 +45,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/ic_action_delete"
-            android:tooltipText="@string/action_delete" />
+            android:tooltipText="@string/action_delete"
+            android:onClick="deleteImage" />
 
         <ImageButton
             android:id="@+id/btn_edit"
@@ -64,7 +65,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/ic_action_share"
-            android:tooltipText="@string/action_share" />
+            android:tooltipText="@string/action_share"
+            android:onClick="shareImage"/>
 
         <ImageButton
             android:id="@+id/btn_bdrawer_view_image_expand"
@@ -90,7 +92,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/ic_action_copy"
-            android:tooltipText="@string/action_copy" />
+            android:tooltipText="@string/action_copy"
+            android:onClick="copyAsFile" />
 
         <ImageButton
             android:id="@+id/btn_move"
@@ -102,13 +105,13 @@
             android:tooltipText="@string/action_move" />
 
         <ImageButton
-            android:id="@+id/btn_location"
+            android:id="@+id/btn_slideshow"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/ripple_rect"
-            android:src="@drawable/ic_action_location"
-            android:tooltipText="@string/action_location" />
+            android:src="@drawable/ic_action_slideshow"
+            android:tooltipText="@string/action_slideshow" />
 
         <ImageButton
             android:id="@+id/btn_favorite"
@@ -117,7 +120,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/ic_favorite"
-            android:tooltipText="@string/action_favorite" />
+            android:tooltipText="@string/action_favorite"
+            android:onClick="toggleFavorite" />
 
         <ImageButton
             android:id="@+id/btn_wallpaper"
@@ -126,7 +130,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/ic_action_wallpaper"
-            android:tooltipText="@string/action_wallpaper" />
+            android:tooltipText="@string/action_wallpaper"
+            android:onClick="setAs" />
 
     </LinearLayout>
 
@@ -162,22 +167,6 @@
 
             <TextView
                 android:id="@+id/info_file_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:layout_columnWeight="2"
-                android:textAlignment="textEnd"
-                android:text="@string/placeholder_card_details" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:text="@string/info_location" />
-
-            <TextView
-                android:id="@+id/info_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"

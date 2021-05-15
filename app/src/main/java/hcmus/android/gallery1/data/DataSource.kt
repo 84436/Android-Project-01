@@ -1,12 +1,9 @@
- package hcmus.android.gallery1.data
+package hcmus.android.gallery1.data
 
 import android.content.ContentResolver
-import android.content.ContentUris
-import android.database.Cursor
-import android.os.Build
-import android.provider.BaseColumns
 import android.provider.MediaStore
-import androidx.annotation.RequiresApi
+import hcmus.android.gallery1.globalPrefs
+import java.util.*
 import androidx.core.database.getIntOrNull
 
  /**
@@ -19,37 +16,92 @@ import androidx.core.database.getIntOrNull
  */
 
 // Get all collections by name (default) or by date
-fun ContentResolver.getCollections(byDate: Boolean = false) : List<Collection> {
+fun ContentResolver.getCollections() : List<Collection> {
     val r : MutableSet<Collection> = mutableSetOf()
 
-    val customSelection = if (byDate==true) {
-        //SELECTION_BY_DATE
-        SELECTION_ONLY_IMAGES_OR_VIDEO
-
-
-    }
-    else {
-        SELECTION_ONLY_IMAGES_OR_VIDEO
-    }
-
      val msCursor = this.query(
+         DEFAULT_CONTENT_URI,
+         arrayOf(
+             MediaStore.Files.FileColumns._ID,
+             MediaStore.Files.FileColumns.BUCKET_ID,
+             MediaStore.Files.FileColumns.BUCKET_DISPLAY_NAME
+         ),
+         SELECTION_ONLY_IMAGES_OR_VIDEO,
+         null,
+         DEFAULT_SORT_ORDER_COLLECTIONS
+     )
+
+     msCursor?.use {
+         while (it.moveToNext()) {
+             val bucketId = it.getLong(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.BUCKET_ID))
+             var collectionExists = false
+
+             // Does the current collection exist in the returning set "r"?
+             for (each in r) {
+                 if (each.id == bucketId) {
+                     each.itemCount += 1
+                     collectionExists = true
+                     break
+                 }
+             }
+
+             // Again, does the current collection exist in the returning set "r"?
+             if (collectionExists) {
+                 continue
+             }
+             else {
+                 val bucketDisplayName = it.getString(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.BUCKET_DISPLAY_NAME))
+                 val bucketThumbnailUri = "$DEFAULT_CONTENT_URI/${it.getLong(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns._ID))}"
+                 r += Collection(
+                     id = bucketId,
+                     name = bucketDisplayName,
+                     thumbnailUri = bucketThumbnailUri,
+                     itemCount = 1,
+                     type = "album"
+                 )
+             }
+         }
+     }
+
+    return r.toList()
+}
+
+// Get collections for tab "Date"
+fun ContentResolver.getCollectionsByDate() : List<Collection> {
+    val r : MutableSet<Collection> = mutableSetOf()
+
+    val msCursor = this.query(
         DEFAULT_CONTENT_URI,
         arrayOf(
             MediaStore.Files.FileColumns._ID,
-            MediaStore.Files.FileColumns.BUCKET_ID,
-            MediaStore.Files.FileColumns.BUCKET_DISPLAY_NAME
+            MediaStore.Files.FileColumns.DATE_MODIFIED
         ),
-        customSelection,
+        SELECTION_ONLY_IMAGES_OR_VIDEO,
         null,
         DEFAULT_SORT_ORDER_COLLECTIONS
     )
 
-
-
-
     msCursor?.use {
         while (it.moveToNext()) {
-            val bucketId = it.getLong(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.BUCKET_ID))
+            // Get month and year from field DATE_MODIFIED
+            // Log.e("SAMPLE", "${it.getLong(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DATE_ADDED))}")
+            val rawDate = it.getLong(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DATE_MODIFIED))
+            val rawCal = GregorianCalendar.getInstance().apply {
+                clear()
+                timeInMillis = rawDate * 1000 // Calendar API works in ms by default, NOT secs
+            }
+            val rawYear = rawCal.get(Calendar.YEAR)
+            val rawMonth = rawCal.get(Calendar.MONTH)
+
+            // Trim to just year and month, and set that as new bucket ID
+            val targetCal = GregorianCalendar.getInstance().apply {
+                clear()
+                set(Calendar.YEAR, rawYear)
+                set(Calendar.MONTH, rawMonth)
+                set(Calendar.DAY_OF_MONTH, 1)
+            }
+            val bucketId = targetCal.timeInMillis / 1000
+
             var collectionExists = false
 
             // Does the current collection exist in the returning set "r"?
@@ -66,13 +118,14 @@ fun ContentResolver.getCollections(byDate: Boolean = false) : List<Collection> {
                 continue
             }
             else {
-                val bucketDisplayName = it.getString(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.BUCKET_DISPLAY_NAME))
+                val bucketDisplayName = "${rawYear}, ${MAP_INT_TO_MONTH[rawMonth + 1]}"
                 val bucketThumbnailUri = "$DEFAULT_CONTENT_URI/${it.getLong(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns._ID))}"
                 r += Collection(
                     id = bucketId,
                     name = bucketDisplayName,
                     thumbnailUri = bucketThumbnailUri,
-                    itemCount = 1
+                    itemCount = 1,
+                    type = "date"
                 )
             }
         }
@@ -81,7 +134,7 @@ fun ContentResolver.getCollections(byDate: Boolean = false) : List<Collection> {
     return r.toList()
 }
 
- // Get items (images/videos) in a collection
+// Get items (images/videos) in a collection
 fun ContentResolver.getItems(collectionId: Long? = null) : List<Item> {
     val r : MutableSet<Item> = mutableSetOf()
 
@@ -94,8 +147,13 @@ fun ContentResolver.getItems(collectionId: Long? = null) : List<Item> {
 
     val msCursor = this.query(
         DEFAULT_CONTENT_URI,
-        arrayOf(MediaStore.Files.FileColumns._ID, MediaStore.Files.FileColumns.DISPLAY_NAME,MediaStore.Files.FileColumns.DATE_MODIFIED
-        ,MediaStore.Files.FileColumns.RESOLUTION,MediaStore.Files.FileColumns.SIZE,MediaStore.Files.FileColumns.RELATIVE_PATH),
+        arrayOf(
+            MediaStore.Files.FileColumns._ID,
+            MediaStore.Files.FileColumns.DISPLAY_NAME,
+            MediaStore.Files.FileColumns.DATE_MODIFIED,
+            MediaStore.Files.FileColumns.SIZE,
+            MediaStore.Files.FileColumns.RELATIVE_PATH
+        ),
         customSelection,
         null,
         DEFAULT_SORT_ORDER_ITEMS
@@ -108,7 +166,7 @@ fun ContentResolver.getItems(collectionId: Long? = null) : List<Item> {
                 dateModified=it.getLong(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DATE_MODIFIED)),
                 fileName = it.getString(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DISPLAY_NAME)),
                 filePath = it.getString(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.RELATIVE_PATH)),
-                width = it.getInt(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.RESOLUTION)),
+
                 fileSize = it.getLong(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.SIZE))
             )
             c.getUri()
@@ -119,123 +177,63 @@ fun ContentResolver.getItems(collectionId: Long? = null) : List<Item> {
     return r.toList()
 }
 
-/********************************************************************************/
+// Get items grouped by date
+fun ContentResolver.getItemsByDate(id: Long? = null) : List<Item> {
+    val r : MutableSet<Item> = mutableSetOf()
 
-/*
-fun ContentResolver.getAllItems() : List<Item> {
-    val r : MutableList<Item> = mutableListOf()
+    // Convert given "id" to year and month
+    val targetCal = GregorianCalendar.getInstance().apply {
+        clear()
+        if (id != null) { timeInMillis = id * 1000 }
+    }
+    val targetYear = targetCal.get(Calendar.YEAR)
+    val targetMonth = targetCal.get(Calendar.MONTH)
 
     val msCursor = this.query(
         DEFAULT_CONTENT_URI,
-        arrayOf(BaseColumns._ID),
+        arrayOf(
+            MediaStore.Files.FileColumns._ID,
+            MediaStore.Files.FileColumns.DISPLAY_NAME,
+            MediaStore.Files.FileColumns.DATE_MODIFIED
+        ),
         SELECTION_ONLY_IMAGES_OR_VIDEO,
         null,
         DEFAULT_SORT_ORDER_ITEMS
     )
 
     msCursor?.use {
-        val idColIndex = it.getColumnIndexOrThrow(BaseColumns._ID)
         while (it.moveToNext()) {
-            r += Item(it.getLong(idColIndex))
-        }
-    }
+            // Convert timestamp to year and month
+            val currentCal = GregorianCalendar.getInstance().apply {
+                clear()
+                timeInMillis = it.getLong(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DATE_MODIFIED)) * 1000
+            }
+            val currentYear = currentCal.get(Calendar.YEAR)
+            val currentMonth = currentCal.get(Calendar.MONTH)
 
-    return r
-}
-
-fun ContentResolver.getOneItem(id: Long) : Item? {
-    val msCursor = this.query(
-        MediaStore.Files.getContentUri("external"),
-
-        // no WHERE clause, since we're getting it all.
-        arrayOf(
-            BaseColumns._ID,
-            MediaStore.Files.FileColumns.DISPLAY_NAME
-        ),
-
-        "(" +
-                SELECTION_CLAUSE_ONLY_IMAGES_OR_VIDEO +
-                ") AND (" +
-                "${BaseColumns._ID} = $id" +
-                ")",
-
-        null,
-
-        "${MediaStore.Files.FileColumns.DATE_MODIFIED} DESC"
-    )
-
-    msCursor?.use {
-        val colIndexID = it.getColumnIndexOrThrow(BaseColumns._ID)
-        val colIndexFilename = it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DISPLAY_NAME)
-
-        while (it.moveToNext())
-        {
-            return Item(
-                id = it.getLong(colIndexID),
-                name = it.getString(colIndexFilename),
-                uri = ContentUris.withAppendedId(
-                    MediaStore.Files.getContentUri("external"),
-                    it.getLong(colIndexID)
-                ).toString()
-            )
-        }
-    }
-
-    return null
-}
-
-fun ContentResolver.getAllCollections(): List<Collection> {
-    val r : MutableSet<Collection> = mutableSetOf()
-
-    val msCursor = this.query(
-        MediaStore.Files.getContentUri("external"),
-
-        // no WHERE clause, since we're getting it all.
-        arrayOf(
-            MediaStore.Files.FileColumns.BUCKET_ID,
-            MediaStore.Files.FileColumns.BUCKET_DISPLAY_NAME
-        ),
-
-        SELECTION_CLAUSE_ONLY_IMAGES_OR_VIDEO,
-
-        null,
-
-        "${MediaStore.Files.FileColumns.DATE_MODIFIED} DESC"
-    )
-
-    msCursor?.use {
-        val colIndexBucketID = it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.BUCKET_ID)
-        val colIndexBucketName = it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.BUCKET_DISPLAY_NAME)
-
-        while (it.moveToNext()) {
-            r += Collection(
-                id = it.getLong(colIndexBucketID),
-                name = it.getString(colIndexBucketName)
-            )
+            // Compare, then add if matched
+            if (currentYear == targetYear && currentMonth == targetMonth) {
+                val c = Item(
+                    id = it.getLong(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns._ID)),
+                    fileName = it.getString(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DISPLAY_NAME))
+                )
+                c.getUri()
+                r += c
+            }
         }
     }
 
     return r.toList()
 }
 
-fun ContentResolver.getOneCollection(bucketId: Long) : List<Item> {
-    val r : MutableList<Item> = mutableListOf()
+// Get favorite items
+fun ContentResolver.getFavorites() : List<Item> {
+    val r : MutableSet<Item> = mutableSetOf()
 
-    val msCursor = this.query(
-        MediaStore.Files.getContentUri("external"),
-        arrayOf(BaseColumns._ID),
-        "${MediaStore.Files.FileColumns.BUCKET_ID} = ? AND $SELECTION_CLAUSE_ONLY_IMAGES_OR_VIDEO",
-        null,
-        "${MediaStore.Files.FileColumns.DATE_MODIFIED} DESC"
-    )
-
-    msCursor?.use {
-        val idColIndex = it.getColumnIndexOrThrow(BaseColumns._ID)
-        while (it.moveToNext()) {
-            r += Item(it.getLong(idColIndex))
-        }
+    val rawId = globalPrefs.getFavorites()
+    for (each in rawId) {
+        r += Item(id = each)
     }
 
-    return r
+    return r.toList()
 }
-*/

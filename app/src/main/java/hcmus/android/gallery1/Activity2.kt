@@ -1,10 +1,15 @@
 package hcmus.android.gallery1
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.preference.PreferenceManager
@@ -14,8 +19,9 @@ import java.util.*
 
 lateinit var globalFragmentManager: FragmentManager
 lateinit var globalPrefs: PreferenceFacility
+lateinit var globalContext: Context
 
-const val PERMISSION_REQUEST_CODE = 0x1337
+const val PERMISSION_REQUEST_CODE = 100
 
 class Activity2 : AppCompatActivity() {
 
@@ -26,6 +32,7 @@ class Activity2 : AppCompatActivity() {
         globalPrefs = PreferenceFacility(
             PreferenceManager.getDefaultSharedPreferences(this)
         )
+        globalContext = baseContext
 
         // Theme and language
         setTheme(globalPrefs.themeR)
@@ -37,11 +44,15 @@ class Activity2 : AppCompatActivity() {
         setContentView(R.layout.activity_2)
         // TODO Bottom drawer
 
-        if (checkSelfPermission(Manifest.permission.MANAGE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
-            requestPermissions(
-                arrayOf(Manifest.permission.MANAGE_EXTERNAL_STORAGE),
+        // A really simple check. Part of the permission workaround.
+        // (the official method always return Permission Denied, yet the app actually has the permission.)
+        if (ContextCompat.checkSelfPermission(applicationContext, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
                 PERMISSION_REQUEST_CODE
             )
+            Toast.makeText(this, resources.getString(R.string.please_grant_permission), Toast.LENGTH_LONG).show()
         }
 
         // Set animations between fragments
@@ -60,6 +71,18 @@ class Activity2 : AppCompatActivity() {
             add(R.id.fragment_container, MainFragment())
         }
     }
+
+    /* override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Permission granted. Please restart the app once.", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
+            }
+            return
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    } */
 
     override fun onBackPressed() {
         // super.onBackPressed()

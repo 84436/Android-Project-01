@@ -14,11 +14,6 @@ val SELECTION_ONLY_IMAGES_OR_VIDEO = "" +
         " OR " +
         "${MediaStore.Files.FileColumns.MEDIA_TYPE} = ${MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO}"
 
-val SELECTION_BY_DATE = "" +
-        "${MediaStore.Files.FileColumns.DATE_ADDED} = ${MediaStore.Files.FileColumns.DATE_ADDED}" +
-        " OR " +
-        "${MediaStore.Files.FileColumns.DATE_ADDED} = ${MediaStore.Files.FileColumns.DATE_ADDED}"
-
 
 // Default ORDER BY clause for items in a collection:
 // latest file first
@@ -34,7 +29,18 @@ val DEFAULT_SORT_ORDER_COLLECTIONS = "" +
         "${MediaStore.Files.FileColumns.DATE_MODIFIED} DESC"
 
 
-
-
-
-
+// Constant int->month map
+val MAP_INT_TO_MONTH = mapOf(
+    1 to "January",
+    2 to "February",
+    3 to "March",
+    4 to "April",
+    5 to "May",
+    6 to "June",
+    7 to "July",
+    8 to "August",
+    9 to "September",
+    10 to "October",
+    11 to "November",
+    12 to "December"
+)

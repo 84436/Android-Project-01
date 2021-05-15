@@ -7,22 +7,10 @@ import hcmus.android.gallery1.data.getItems
 data class Collection (
     val id: Long,
     val name: String,
+    val type: String,
     val thumbnailUri: String,
     var itemCount: Int,
-    var isPopulated: Boolean = false,
 
     // Lazy-load fields
-    var items: List<ClipData.Item> = emptyList()
-
+    var items: List<Item> = emptyList()
 )
-
-{
-    fun getListItem():List<ClipData.Item>{
-        return items
-    }
-    fun populate() {
-        if (!isPopulated) {
-            isPopulated = true
-        }
-    }
-}
