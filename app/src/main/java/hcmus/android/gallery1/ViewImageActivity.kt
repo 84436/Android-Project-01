@@ -103,11 +103,21 @@ class ViewImageActivity : AppCompatActivity() {
         val itemId = intent.getLongExtra("id", 0)
         val itemFileName = intent.getStringExtra("filename")
         val itemUri = intent.getStringExtra("uri")
+        val itemSize=intent.getLongExtra("size",0)
+        val itemTime=intent.getLongExtra("time",0)
+        val itemResolution=intent.getIntExtra("resolution",0)
+        val itemPath=intent.getStringExtra("path")
+
 
         item = Item(
             id = itemId,
             fileName = itemFileName!!,
-            uri = itemUri!!
+            uri = itemUri!!,
+            fileSize=itemSize/1048576,
+            filePath = itemPath.toString(),
+            dateModified = itemTime,
+            width = itemResolution
+
         )
 
         Glide.with(imageHolder.context)
@@ -128,10 +138,13 @@ class ViewImageActivity : AppCompatActivity() {
 
 
         val image_fileSize=findViewById<TextView>(R.id.info_file_size)
-        image_fileSize.text=item.fileSize.toString()
+        image_fileSize.text=item.fileSize.toString() +"MB"
 
         val image_filePath=findViewById<TextView>(R.id.info_file_path)
         image_filePath.text=item.filePath
+
+
+
 
     }
 

@@ -108,7 +108,7 @@ fun ContentResolver.getItems(collectionId: Long? = null) : List<Item> {
                 dateModified=it.getLong(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DATE_MODIFIED)),
                 fileName = it.getString(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DISPLAY_NAME)),
                 filePath = it.getString(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.RELATIVE_PATH)),
-
+                width = it.getInt(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.RESOLUTION)),
                 fileSize = it.getLong(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.SIZE))
             )
             c.getUri()
