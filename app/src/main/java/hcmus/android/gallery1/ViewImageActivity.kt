@@ -113,7 +113,7 @@ class ViewImageActivity : AppCompatActivity() {
             id = itemId,
             fileName = itemFileName!!,
             uri = itemUri!!,
-            fileSize=itemSize/1048576,
+            fileSize=itemSize,
             filePath = itemPath.toString(),
             dateModified = itemTime,
             width = itemResolution
@@ -138,7 +138,7 @@ class ViewImageActivity : AppCompatActivity() {
 
 
         val image_fileSize=findViewById<TextView>(R.id.info_file_size)
-        image_fileSize.text=item.fileSize.toString() +"MB"
+        image_fileSize.text=item.fileSize.toString() +"Byte"
 
         val image_filePath=findViewById<TextView>(R.id.info_file_path)
         image_filePath.text=item.filePath
