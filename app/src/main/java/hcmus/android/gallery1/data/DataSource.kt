@@ -74,7 +74,8 @@ fun ContentResolver.getCollectionsByDate() : List<Collection> {
         DEFAULT_CONTENT_URI,
         arrayOf(
             MediaStore.Files.FileColumns._ID,
-            MediaStore.Files.FileColumns.DATE_MODIFIED
+            MediaStore.Files.FileColumns.DATE_MODIFIED,
+
         ),
         SELECTION_ONLY_IMAGES_OR_VIDEO,
         null,
@@ -152,6 +153,7 @@ fun ContentResolver.getItems(collectionId: Long? = null) : List<Item> {
             MediaStore.Files.FileColumns.DISPLAY_NAME,
             MediaStore.Files.FileColumns.DATE_MODIFIED,
             MediaStore.Files.FileColumns.SIZE,
+            MediaStore.Files.FileColumns.RESOLUTION,
             MediaStore.Files.FileColumns.RELATIVE_PATH
         ),
         customSelection,
@@ -166,7 +168,7 @@ fun ContentResolver.getItems(collectionId: Long? = null) : List<Item> {
                 dateModified=it.getLong(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DATE_MODIFIED)),
                 fileName = it.getString(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DISPLAY_NAME)),
                 filePath = it.getString(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.RELATIVE_PATH)),
-
+                width=it.getInt(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.RESOLUTION)),
                 fileSize = it.getLong(it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.SIZE))
             )
             c.getUri()

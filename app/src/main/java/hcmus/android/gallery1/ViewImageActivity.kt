@@ -134,29 +134,9 @@ class ViewImageActivity : AppCompatActivity() {
             filePath = itemPath.toString(),
             dateModified = itemTime,
             width = itemResolution
-
-        // Workaround
-        item = if (itemId == 0L) {
-            Item(
-                id = 0,
-                fileName = "unknown",
-                uri = intent.data.toString()
-            )
-        } else {
-            Item(
-                id = itemId,
-                fileName = itemFileName!!,
-                uri = itemUri!!,
-                fileSize=itemSize/1048576,
-                filePath = itemPath.toString(),
-                dateModified = itemTime,
-                width = itemResolution
-            )
-        }
+        )
 
 
-        // Workaround
-        if (itemId == 0L) workaroundDisableButtons()
 
         Glide.with(imageHolder.context)
             .load(item.getUri())
@@ -171,6 +151,9 @@ class ViewImageActivity : AppCompatActivity() {
 
         val image_time=findViewById<TextView>(R.id.info_timestamp)
         image_time.text=item.dateModified.toString()
+
+        val image_resolution=findViewById<TextView>(R.id.info_resolution)
+        image_resolution.text=item.width.toString()
 
 
 
