@@ -92,11 +92,7 @@ class ViewImageActivity : AppCompatActivity() {
         populateImageAndInfo()
 
     }
-    private inner class ScreenSlidePagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
-        override fun getItemCount(): Int = 5
 
-        override fun createFragment(position: Int): Fragment = slideActivityFragment()
-    }
 
     private fun populateImageAndInfo() {
 
